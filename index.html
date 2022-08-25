@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>CodeJam</title>
+</head>
+
+<body>
+    <header class="header"></header>
+    <main class="main">
+        <div class="main__container">
+            <aside class="left__aside">
+                <div class="ancient-card" id="azathoth-card"></div>
+                <div class="ancient-card" id="cthulthu-card"></div>
+                <div class="ancient-card" id="iogsothoth-card"></div>
+                <div class="ancient-card" id="shubniggurath-card"></div>
+            </aside>
+            <div class="main__center-difficulty">
+                <div class="difficulty-container">
+                    <div class="difficulty" id="very__low-dif">Очень легкая</div>
+                    <div class="difficulty" id="low-dif">Легкая</div>
+                    <div class="difficulty" id="middle-dif">Средняя</div>
+                    <div class="difficulty" id="high-dif">Высокая</div>
+                    <div class="difficulty" id="veryhigh-dif">Очень высокая</div>
+                </div>
+            </div>
+            <aside class="right__aside">
+                <button class="separator" id ="separator__button">Замешать колоду</button>
+                <div class="current-state">
+                    <div class="stage-container">
+                        <span class="stage-text">Первая стадия</span>
+                        <div class="dots-container">
+                            <div class="dot green" id="1"></div>
+                            <div class="dot brown" id="2"></div>
+                            <div class="dot blue" id="3"></div>
+                        </div>
+                    </div>
+                    <div class="stage-container"><span class="stage-text">Вторая стадия</span>
+                        <div class="dots-container">
+                            <div class="dot green" id="4"></div>
+                            <div class="dot brown" id="5"></div>
+                            <div class="dot blue" id="6"></div>
+                        </div>
+                    </div>
+                    <div class="stage-container"><span class="stage-text">Третья стадия</span>
+                        <div class="dots-container">
+                            <div class="dot green" id="7"></div>
+                            <div class="dot brown" id="8"></div>
+                            <div class="dot blue" id="9"></div>
+                        </div>
+                    </div>
+                    <div class="deck">
+                    </div>
+                    <div class="last-card">
+                    </div>
+                </div>
+               
+            </aside>
+        </div>
+    </main>
+    <footer class="footer"></footer>
+    <script type="module" src="./JS/script.js"></script>
+</body>
+
+</html>
