@@ -644,15 +644,9 @@ function separator(level) {
 
 let count = 0;
 document.getElementById('separator__button').addEventListener('click', function () {
-
     document.querySelector('.deck').style.visibility = 'visible';
     separator(difficulty);
 })
-/* document.getElementById('1').innerHTML = 1;
-document.getElementById('2').innerHTML = 2;
-document.getElementById('3').innerHTML = 1; */
-
-console.log(stageOnesum)
 
 function counter() {
     if (count < stageOnesum && cardDeckRes[count].color == 'green' && document.getElementById('1').innerHTML != 0) {
@@ -692,7 +686,7 @@ function counter() {
 
 function getCardToScreen() {
     if (count < cardDeckRes.length) {
-        document.querySelector('.last-card').style.backgroundImage = 'url(' + cardDeckRes[count].url + ')';
+        document.querySelector('.last-card').style.backgroundImage = `url(${cardDeckRes[count].url}`;
         counter();
         count++;
     }
