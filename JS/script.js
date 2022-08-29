@@ -96,19 +96,23 @@ document.getElementById('veryhigh-dif').addEventListener('click', () => {
     document.querySelector('.current-state').classList.remove('active');
     difficulty = 'veryHard';
 })
-
+let stageOnesum;
+let stageTwosum;
+let stageThreesum;
 function getCurrentCard() {
     if (azathothPath) {
-        document.getElementById('1').innerHTML = '1';
-        document.getElementById('2').innerHTML = '2';
-        document.getElementById('3').innerHTML = '1';
-        document.getElementById('4').innerHTML = '2';
-        document.getElementById('5').innerHTML = '3';
-        document.getElementById('6').innerHTML = '1';
-        document.getElementById('7').innerHTML = '2';
-        document.getElementById('8').innerHTML = '4';
-        document.getElementById('9').innerHTML = '0';
-
+        document.getElementById('1').innerHTML = 1;
+        document.getElementById('2').innerHTML = 2;
+        document.getElementById('3').innerHTML = 1;
+        document.getElementById('4').innerHTML = 2;
+        document.getElementById('5').innerHTML = 3;
+        document.getElementById('6').innerHTML = 1;
+        document.getElementById('7').innerHTML = 2;
+        document.getElementById('8').innerHTML = 4;
+        document.getElementById('9').innerHTML = 0;
+        stageOnesum = 4;
+        stageTwosum = 6;
+        stageThreesum = 6;
     }
     if (cthulhuPath) {
         document.getElementById('1').innerHTML = '0';
@@ -120,6 +124,9 @@ function getCurrentCard() {
         document.getElementById('7').innerHTML = '3';
         document.getElementById('8').innerHTML = '4';
         document.getElementById('9').innerHTML = '0';
+        stageOnesum = 4;
+        stageTwosum = 4;
+        stageThreesum = 7;
     }
     if (iogsothPath) {
         document.getElementById('1').innerHTML = '0';
@@ -131,17 +138,23 @@ function getCurrentCard() {
         document.getElementById('7').innerHTML = '3';
         document.getElementById('8').innerHTML = '4';
         document.getElementById('9').innerHTML = '0';
+        stageOnesum = 3;
+        stageTwosum = 6;
+        stageThreesum = 7;
     }
     if (shubNiggurathPath) {
         document.getElementById('1').innerHTML = '1';
         document.getElementById('2').innerHTML = '2';
         document.getElementById('3').innerHTML = '1';
-        document.getElementById('4').innerHTML = '2';
-        document.getElementById('5').innerHTML = '3';
+        document.getElementById('4').innerHTML = '3';
+        document.getElementById('5').innerHTML = '2';
         document.getElementById('6').innerHTML = '1';
         document.getElementById('7').innerHTML = '2';
         document.getElementById('8').innerHTML = '4';
         document.getElementById('9').innerHTML = '0';
+        stageOnesum = 4;
+        stageTwosum = 6;
+        stageThreesum = 6;
     }
 }
 
@@ -186,7 +199,7 @@ function separatorGreenCard(sumOfCards) {
                 temp.push(greenCardsDeckCopy[i]);
             }
         }
-        if ((sumOfCards - temp.length) < 0) {
+        if (temp.length > sumOfCards) {
             temp.sort(() => Math.random() - 0.5);
             temp.length = sumOfCards;
         }
@@ -360,7 +373,7 @@ function separatorBrownCard(sumOfCards) {
             }
         }
         if ((sumOfCards - temp.length) < 0) {
-            temp.sort(() => Math.random() - 0.5);
+            // temp.sort(() => Math.random() - 0.5);
             temp.length = sumOfCards;
         }
         cardDeckTempBrown = temp.sort(() => Math.random() - 0.5);
@@ -414,7 +427,7 @@ function separatorBrownCard(sumOfCards) {
     }
 }
 
-let cardDeckRes;
+let cardDeckRes = [];
 function separator(level) {
     let cardDeckStage1 = [];
     let cardDeckStage2 = [];
@@ -469,6 +482,7 @@ function separator(level) {
         cardDeckStage3.sort(() => Math.random() - 0.5); //Перемешиваем
         //Формируем общую колоду
         cardDeckRes = cardDeckStage1.concat(cardDeckStage2).concat(cardDeckStage3);
+
     }
     if (cthulhuPath) {
         separatorBlueCard(2);
@@ -518,6 +532,7 @@ function separator(level) {
         cardDeckStage3.sort(() => Math.random() - 0.5); //Перемешиваем
         //Формируем общую колоду
         cardDeckRes = cardDeckStage1.concat(cardDeckStage2).concat(cardDeckStage3);
+
     };
     if (iogsothPath) {
         separatorBlueCard(2);
@@ -569,7 +584,8 @@ function separator(level) {
         cardDeckStage3.sort(() => Math.random() - 0.5); //Перемешиваем
         //Формируем общую колоду
         cardDeckRes = cardDeckStage1.concat(cardDeckStage2).concat(cardDeckStage3);
-    }
+
+    };
     if (shubNiggurathPath) {
         separatorBlueCard(2);
         separatorBrownCard(8);
@@ -583,6 +599,9 @@ function separator(level) {
         cardDeckStage1.push(cardDeckTempBrown[cardDeckTempBrown.length - 1])
         cardDeckTempBrown.pop();
         //формируем колоду первой стадии Green
+        cardDeckStage1.push(cardDeckTempGreen[cardDeckTempGreen.length - 1])
+        cardDeckTempGreen.pop();
+
         cardDeckStage1.sort(() => Math.random() - 0.5); //Перемешиваем
         //второй стадии Blue
         cardDeckStage2.push(cardDeckTempBlue[cardDeckTempBlue.length - 1])
@@ -599,8 +618,10 @@ function separator(level) {
         cardDeckTempGreen.pop();
         cardDeckStage2.push(cardDeckTempGreen[cardDeckTempGreen.length - 1])
         cardDeckTempGreen.pop();
+
         cardDeckStage2.sort(() => Math.random() - 0.5); //Перемешиваем
         //3-й стадии Blue
+
         //3-й стадии Brown
         cardDeckStage3.push(cardDeckTempBrown[cardDeckTempBrown.length - 1])
         cardDeckTempBrown.pop();
@@ -618,26 +639,87 @@ function separator(level) {
         cardDeckStage3.sort(() => Math.random() - 0.5); //Перемешиваем
         //Формируем общую колоду
         cardDeckRes = cardDeckStage1.concat(cardDeckStage2).concat(cardDeckStage3);
-        console.log(cardDeckRes.length);
+
     }
 }
-document.getElementById('separator__button').addEventListener('click', function () {
-    document.querySelector('.deck').style.visibility = 'visible';
-})
+
 let count = 0;
+document.getElementById('separator__button').addEventListener('click', function () {
+
+    document.querySelector('.deck').style.visibility = 'visible';
+    separator(difficulty);
+})
+/* document.getElementById('1').innerHTML = 1;
+document.getElementById('2').innerHTML = 2;
+document.getElementById('3').innerHTML = 1; */
+
+console.log(stageOnesum)
+
+function counter() {
+    if (count < stageOnesum && cardDeckRes[count].color == 'green' && document.getElementById('1').innerHTML != 0) {
+
+        document.getElementById('1').innerHTML = +document.getElementById('1').innerHTML - 1;
+    } else if (count < stageOnesum && cardDeckRes[count].color == 'brown' && document.getElementById('2').innerHTML != 0) {
+        document.getElementById('2').innerHTML = +document.getElementById('2').innerHTML - 1;
+
+    } else if (count < stageOnesum && cardDeckRes[count].color == 'blue' && document.getElementById('3').innerHTML != 0) {
+        document.getElementById('3').innerHTML = +document.getElementById('3').innerHTML - 1;
+    }
+
+    if (count >= stageOnesum && count < (stageTwosum + stageOnesum) && cardDeckRes[count].color == 'green' && document.getElementById('4').innerHTML != 0) {
+        document.getElementById('4').innerHTML = +document.getElementById('4').innerHTML - 1;
+
+    } else if (count >= stageOnesum && count < (stageTwosum + stageOnesum) && cardDeckRes[count].color == 'brown' && document.getElementById('5').innerHTML != 0) {
+        document.getElementById('5').innerHTML = +document.getElementById('5').innerHTML - 1;
+
+
+    } else if (count >= stageOnesum && count < (stageTwosum + stageOnesum) && cardDeckRes[count].color == 'blue' && document.getElementById('6').innerHTML != 0) {
+        document.getElementById('6').innerHTML = +document.getElementById('6').innerHTML - 1;
+
+    }
+
+    if (count >= (stageOnesum + stageTwosum) && count < (stageThreesum + stageTwosum + stageOnesum) && cardDeckRes[count].color == 'green' && document.getElementById('7').innerHTML != 0) {
+        document.getElementById('7').innerHTML = +document.getElementById('7').innerHTML - 1;
+
+    } else if (count >= (stageOnesum + stageTwosum) && count < (stageThreesum + stageTwosum + stageOnesum) && cardDeckRes[count].color == 'brown' && document.getElementById('8').innerHTML != 0) {
+        document.getElementById('8').innerHTML = +document.getElementById('8').innerHTML - 1;
+
+
+    } else if (count >= (stageOnesum + stageTwosum) && count < (stageThreesum + stageTwosum + stageOnesum) && cardDeckRes[count].color == 'blue' && document.getElementById('9').innerHTML != 0) {
+        document.getElementById('9').innerHTML = +document.getElementById('9').innerHTML - 1;
+
+    }
+}
 
 function getCardToScreen() {
     if (count < cardDeckRes.length) {
         document.querySelector('.last-card').style.backgroundImage = 'url(' + cardDeckRes[count].url + ')';
+        counter();
         count++;
     }
+
+
+
     else {
+        alert('The deck of cards is over');
+        window.location.reload();
         return;
     }
-    console.log(count);
+    console.log(cardDeckRes);
 }
 
 document.querySelector('.deck').addEventListener('click', () => {
-    separator(difficulty);
+
     getCardToScreen();
+    if (count == cardDeckRes.length) {
+        document.querySelector('.deck').style.cursor = 'default';
+        document.querySelector('.deck').style.opacity = 0;
+    }
+
 })
+
+// function enumerator() {
+//     if (count < 3 &&  cardDeckRes[count].сolor == 'brown') {
+//        document.getElementById('2').innerHTML = +document.getElementById('2').innerHTML--
+//     }
+// }
