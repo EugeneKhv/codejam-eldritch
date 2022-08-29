@@ -686,17 +686,16 @@ function counter() {
 
 function getCardToScreen() {
     if (count < cardDeckRes.length) {
-        document.querySelector('.last-card').style.backgroundImage = `url(${cardDeckRes[count].url}`;
+        document.querySelector('.last-card').style.backgroundImage = `url(${cardDeckRes[count].url})`;
         counter();
         count++;
     }
-
-
-
     else {
         alert('The deck of cards is over');
         window.location.reload();
+        count = 0;
         return;
+
     }
     console.log(cardDeckRes);
 }
