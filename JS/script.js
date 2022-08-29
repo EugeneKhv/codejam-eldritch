@@ -1,7 +1,6 @@
 import cardsDataBlue from './blueCardsArr.js';
 import cardsDataGreen from './greenCardsArr.js';
 import cardsDataBrown from './brownCardsArr.js';
-import ancientsData from './ancientsArr.js';
 
 const azathothCard = document.getElementById('azathoth-card');
 const cthulhuCard = document.getElementById('cthulthu-card');
